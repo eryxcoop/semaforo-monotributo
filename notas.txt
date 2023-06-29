@@ -1,0 +1,24 @@
+inflación proyectada, lista de retiros en ARS del socie del pasado, retiro del mes actual, límite de la última categoría del monotributo.
+De salida, cual es el monto máximo recomendado.
+
+calcular_maximo_a_pedir(...
+    ...
+    total_anterior = suma de lo pedido en los meses anteriores dentro del periodo (ultimo año)
+    ...
+    resto_que_puedo_pedir_en_el_periodo = (maximo_para_pasar_de_categoria - total_anterior)
+    pedido por mes sin ajustar por infla = resto que puedo pedir en el peridodo / meses que le quedan al periodo contando el actual
+    recomendado = (pedido por mes sin ajustar por infla) min: ADE de este mes
+    return maximo_calculado
+)
+
+limite = 120K
+1 + 1 + 1 + 1 = 4
+pedido por mes = 120K / 4 = 30K
+
+1+1.1+1.4 = 3.5
+resto_que_puedo_pedir_en_el_periodo / 3.5 = pedido por mes
+resto_que_puedo_pedir_en_el_periodo = 120
+30K + 60K + 90K
+1 + 2 + 3 = 6
+pedido por mes = 120 / 6 = 20K
+20K + 40K + 60K = 120K
