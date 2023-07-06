@@ -11,7 +11,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
             retiros_anteriores_en_el_periodo,
             retiro_total_del_mes,
             meses_restantes_en_el_periodo,
-            maximo_de_la_ultima_categoria_monotributo
+            maximo_de_la_ultima_categoria_monotributo,
+            0
         )
         expect(retiro_sugerido).toBe(10);
     });
@@ -26,7 +27,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
             retiros_anteriores_en_el_periodo,
             retiro_total_del_mes,
             meses_restantes_en_el_periodo,
-            maximo_de_la_ultima_categoria_monotributo
+            maximo_de_la_ultima_categoria_monotributo,
+            0
         )
         expect(retiro_sugerido).toBe(5);
     });
@@ -41,8 +43,26 @@ describe("Retiro sugerido en pesos para el mes", () => {
             retiros_anteriores_en_el_periodo,
             retiro_total_del_mes,
             meses_restantes_en_el_periodo,
-            maximo_de_la_ultima_categoria_monotributo
+            maximo_de_la_ultima_categoria_monotributo,
+            0
         )
         expect(retiro_sugerido).toBe(10);
+    });
+
+    test('Cuando hay inflacion, los meses futuros se actualizan acordemente', () => {
+        let retiros_anteriores_en_el_periodo: Peso[] = [10, 10]
+        let retiro_total_del_mes: Peso = 20
+        let meses_restantes_en_el_periodo: number = 2
+        let maximo_de_la_ultima_categoria_monotributo: Peso = 40
+        let inflacion_proyectada_mensual = 0.5;
+
+        let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
+            retiros_anteriores_en_el_periodo,
+            retiro_total_del_mes,
+            meses_restantes_en_el_periodo,
+            maximo_de_la_ultima_categoria_monotributo,
+            inflacion_proyectada_mensual
+        )
+        expect(retiro_sugerido).toBe(8);
     });
 });
