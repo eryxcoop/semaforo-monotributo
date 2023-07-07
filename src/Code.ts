@@ -16,12 +16,12 @@ export function retiro_en_pesos_sugerido_para_el_mes(
         const total_meses_futuros_incluyendo_actual = maximo_de_la_ultima_categoria_monotributo - total_meses_anteriores;
         const aumento_mensual_por_inflacion = 1 + inflacion_proyectada_mensual;
 
-        let xxx = 1;
+        let meses_restantes_mas_inflacion = 1;
         for (let i = 1; i < meses_restantes_en_el_periodo; i++) {
-            xxx += Math.pow(aumento_mensual_por_inflacion, i);
+            meses_restantes_mas_inflacion += Math.pow(aumento_mensual_por_inflacion, i);
         }
 
-        const retiro_maximo_mes_actual = total_meses_futuros_incluyendo_actual / xxx;
+        const retiro_maximo_mes_actual = total_meses_futuros_incluyendo_actual / meses_restantes_mas_inflacion;
         const retiro_sugerido_mes_actual = minimo(retiro_maximo_mes_actual, retiro_total_del_mes);
         return retiro_sugerido_mes_actual;
     }
