@@ -34,7 +34,7 @@ describe("Retiro sugerido en pesos para el mes", () => {
 
         test('Los meses pasados en el periodo se contabilizan para la categoria del monotributo', () => {
             let retiros_anteriores_en_el_periodo: Peso[] = [10, 10]
-            let retiro_total_del_mes: Peso = 20
+            let retiro_total_del_mes: Peso = 100
             let meses_restantes_en_el_periodo: number = 1
             let maximo_de_la_ultima_categoria_monotributo: Peso = 30
 
@@ -52,7 +52,7 @@ describe("Retiro sugerido en pesos para el mes", () => {
     });
 
     test('Cuando no hay inflacion, y restan varios meses en el periodo, se asumen iguales al mes actual', () => {
-        let retiro_total_del_mes: Peso = 20
+        let retiro_total_del_mes: Peso = 100
         let meses_restantes_en_el_periodo: number = 3
         let maximo_de_la_ultima_categoria_monotributo: Peso = 30
 
