@@ -18,13 +18,12 @@ describe("Retiro sugerido en pesos para el mes", () => {
         });
 
         test('Cuando se va a alcanzar el limite del monotributo, el retiro en pesos sugerido es el maximo sin pasarse', () => {
-            let retiro_total_del_mes: Peso = 100
             let meses_restantes_en_el_periodo: number = 1
             let maximo_de_la_ultima_categoria_monotributo: Peso = 10
 
             let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
                 [],
-                retiro_total_del_mes,
+                100,
                 meses_restantes_en_el_periodo,
                 maximo_de_la_ultima_categoria_monotributo,
                 0
@@ -34,13 +33,12 @@ describe("Retiro sugerido en pesos para el mes", () => {
 
         test('Los meses pasados en el periodo se contabilizan para la categoria del monotributo', () => {
             let retiros_anteriores_en_el_periodo: Peso[] = [10, 10]
-            let retiro_total_del_mes: Peso = 100
             let meses_restantes_en_el_periodo: number = 1
             let maximo_de_la_ultima_categoria_monotributo: Peso = 30
 
             let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
                 retiros_anteriores_en_el_periodo,
-                retiro_total_del_mes,
+                100,
                 meses_restantes_en_el_periodo,
                 maximo_de_la_ultima_categoria_monotributo,
                 0
@@ -52,30 +50,29 @@ describe("Retiro sugerido en pesos para el mes", () => {
     });
 
     test('Cuando no hay inflacion, y restan varios meses en el periodo, se asumen iguales al mes actual', () => {
-        let retiro_total_del_mes: Peso = 100
         let meses_restantes_en_el_periodo: number = 3
         let maximo_de_la_ultima_categoria_monotributo: Peso = 30
+        let inflacion_proyectada_mensual = 0;
 
         let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
             [],
-            retiro_total_del_mes,
+            100,
             meses_restantes_en_el_periodo,
             maximo_de_la_ultima_categoria_monotributo,
-            0
+            inflacion_proyectada_mensual
         )
         let maximo_retiro_en_los_meses_restantes = maximo_de_la_ultima_categoria_monotributo / meses_restantes_en_el_periodo;
         expect(retiro_sugerido).toBe(maximo_retiro_en_los_meses_restantes);
     });
 
     test('Se tiene en cuenta la inflacion del mes siguiente para el retiro sugerido del mes actual', () => {
-        let retiro_total_del_mes: Peso = 100
         let meses_restantes_en_el_periodo: number = 2
         let maximo_de_la_ultima_categoria_monotributo: Peso = 40
         let inflacion_proyectada_mensual = 0.5;
 
         let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
             [],
-            retiro_total_del_mes,
+            100,
             meses_restantes_en_el_periodo,
             maximo_de_la_ultima_categoria_monotributo,
             inflacion_proyectada_mensual
@@ -88,14 +85,13 @@ describe("Retiro sugerido en pesos para el mes", () => {
     });
 
     test('La inflacion se estima correctamente para varios meses futuros', () => {
-        let retiro_total_del_mes: Peso = 100
         let meses_restantes_en_el_periodo: number = 3
         let maximo_de_la_ultima_categoria_monotributo: Peso = 38
         let inflacion_proyectada_mensual = 0.5;
 
         let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
             [],
-            retiro_total_del_mes,
+            100,
             meses_restantes_en_el_periodo,
             maximo_de_la_ultima_categoria_monotributo,
             inflacion_proyectada_mensual
