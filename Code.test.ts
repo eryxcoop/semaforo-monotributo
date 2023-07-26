@@ -18,7 +18,7 @@ describe("Retiro sugerido en pesos para el mes", () => {
         });
 
         test('Cuando se va a alcanzar el limite del monotributo, el retiro en pesos sugerido es el maximo sin pasarse', () => {
-            let retiro_total_del_mes: Peso = 20
+            let retiro_total_del_mes: Peso = 100
             let meses_restantes_en_el_periodo: number = 1
             let maximo_de_la_ultima_categoria_monotributo: Peso = 10
 
