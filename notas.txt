@@ -11,14 +11,10 @@ calcular_maximo_a_pedir(...
     return maximo_calculado
 )
 
-limite = 120K
-1 + 1 + 1 + 1 = 4
-pedido por mes = 120K / 4 = 30K
+- LA SERIE HACERLA DIARIA Y NO MENSUAL
+- USAR LA INFLACION CORE
+- TIPO DE CAMBIO
+- ESPACIO HASTA COMPLETAR EL MONOTRIBUTO, MARGEN DE SEGURIDAD
+- MODELO ARIMA PARA ESTIMAR EN BASE A LOS RETIROS HISTORICOS
 
-1+1.1+1.4 = 3.5
-resto_que_puedo_pedir_en_el_periodo / 3.5 = pedido por mes
-resto_que_puedo_pedir_en_el_periodo = 120
-30K + 60K + 90K
-1 + 2 + 3 = 6
-pedido por mes = 120 / 6 = 20K
-20K + 40K + 60K = 120K
+quizas haya que sacar los tipos porque se parsean mal en appscript
