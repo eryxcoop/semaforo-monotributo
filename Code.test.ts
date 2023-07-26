@@ -1,4 +1,4 @@
-import {Peso, retiro_en_pesos_sugerido_para_el_mes} from "./src/Code";
+import {Peso, retiro_en_pesos_sugerido_para_el_mes, suma} from "./src/Code";
 
 describe("Retiro sugerido en pesos para el mes", () => {
     describe("En el ultimo mes del periodo", () => {
@@ -19,10 +19,10 @@ describe("Retiro sugerido en pesos para el mes", () => {
         });
 
         test('Cuando se va a alcanzar el limite del monotributo, el retiro en pesos sugerido es el maximo sin pasarse', () => {
-            let retiros_anteriores_en_el_periodo: Peso[] = [10, 10]
-            let retiro_total_del_mes: Peso = 10
+            let retiros_anteriores_en_el_periodo: Peso[] = []
+            let retiro_total_del_mes: Peso = 20
             let meses_restantes_en_el_periodo: number = 1
-            let maximo_de_la_ultima_categoria_monotributo: Peso = 25
+            let maximo_de_la_ultima_categoria_monotributo: Peso = 10
 
             let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
                 retiros_anteriores_en_el_periodo,
@@ -31,7 +31,25 @@ describe("Retiro sugerido en pesos para el mes", () => {
                 maximo_de_la_ultima_categoria_monotributo,
                 0
             )
-            expect(retiro_sugerido).toBe(5);
+            expect(retiro_sugerido).toBe(maximo_de_la_ultima_categoria_monotributo);
+        });
+
+        test('Los meses pasados se tienen en cuenta para sugerir el retiro', () => {
+            let retiros_anteriores_en_el_periodo: Peso[] = [10, 10]
+            let retiro_total_del_mes: Peso = 20
+            let meses_restantes_en_el_periodo: number = 1
+            let maximo_de_la_ultima_categoria_monotributo: Peso = 30
+
+            let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
+                retiros_anteriores_en_el_periodo,
+                retiro_total_del_mes,
+                meses_restantes_en_el_periodo,
+                maximo_de_la_ultima_categoria_monotributo,
+                0
+            )
+            const total_meses_pasados = suma(retiros_anteriores_en_el_periodo);
+            const maximo_retiro_sin_pasar_limite = maximo_de_la_ultima_categoria_monotributo - total_meses_pasados
+            expect(retiro_sugerido).toBe(maximo_retiro_sin_pasar_limite);
         });
     });
 

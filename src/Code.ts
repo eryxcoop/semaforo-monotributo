@@ -17,8 +17,8 @@ export function retiro_en_pesos_sugerido_para_el_mes(
         const aumento_mensual_por_inflacion = 1 + inflacion_proyectada_mensual;
 
         let meses_restantes_mas_inflacion = 1;
-        for (let i = 1; i < meses_restantes_en_el_periodo; i++) {
-            meses_restantes_mas_inflacion += Math.pow(aumento_mensual_por_inflacion, i);
+        for (let mes_futuro = 1; mes_futuro < meses_restantes_en_el_periodo; mes_futuro++) {
+            meses_restantes_mas_inflacion += Math.pow(aumento_mensual_por_inflacion, mes_futuro);
         }
 
         const retiro_maximo_mes_actual = total_meses_futuros_incluyendo_actual / meses_restantes_mas_inflacion;
@@ -27,7 +27,7 @@ export function retiro_en_pesos_sugerido_para_el_mes(
     }
 }
 
-function suma(lista_de_retiros: Peso[]): Peso {
+export function suma(lista_de_retiros: Peso[]): Peso {
     let total: Peso = 0
     lista_de_retiros.forEach(retiro => total += retiro);
     return total;
