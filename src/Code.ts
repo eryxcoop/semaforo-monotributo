@@ -9,12 +9,12 @@ export function retiro_en_pesos_sugerido_para_el_mes(
     precio_del_dolar_oficial_actual,
     precio_del_dolar_mep_actual,
 ): Peso {
-    const total_meses_anteriores = suma(retiros_anteriores_en_el_periodo);
-    const total_restante_en_el_periodo = maximo_de_la_ultima_categoria_monotributo - total_meses_anteriores;
+    const total_restante_en_el_periodo = restante_en_el_periodo_antes_de_subir_de_categoria(retiros_anteriores_en_el_periodo,
+        maximo_de_la_ultima_categoria_monotributo);
 
     const inflacion_acumulada_futura = inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo, inflacion_proyectada_mensual);
 
-    if(precio_del_dolar_oficial_actual != precio_del_dolar_mep_actual) {
+    if (precio_del_dolar_oficial_actual != precio_del_dolar_mep_actual) {
         return 6;
     }
 
@@ -22,6 +22,12 @@ export function retiro_en_pesos_sugerido_para_el_mes(
     const retiro_sugerido_mes_actual = minimo(retiro_maximo_mes_actual, retiro_total_del_mes);
 
     return retiro_sugerido_mes_actual;
+}
+
+function restante_en_el_periodo_antes_de_subir_de_categoria(retiros_anteriores_en_el_periodo: Peso[], maximo_de_la_ultima_categoria_monotributo: number) {
+    const total_meses_anteriores = suma(retiros_anteriores_en_el_periodo);
+    const total_restante_en_el_periodo = maximo_de_la_ultima_categoria_monotributo - total_meses_anteriores;
+    return total_restante_en_el_periodo;
 }
 
 function inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo: number, inflacion_proyectada_mensual: number) {
