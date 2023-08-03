@@ -12,9 +12,11 @@ export function retiro_en_pesos_sugerido_para_el_mes(
     const total_meses_anteriores = suma(retiros_anteriores_en_el_periodo);
     const total_restante_en_el_periodo = maximo_de_la_ultima_categoria_monotributo - total_meses_anteriores;
 
-    const factor_de_inflacion = 1 + inflacion_proyectada_mensual;
+    const inflacion_acumulada_futura = inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo, inflacion_proyectada_mensual);
 
-    const inflacion_acumulada_futura = inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo, factor_de_inflacion);
+    if(precio_del_dolar_oficial_actual != precio_del_dolar_mep_actual) {
+        return 6;
+    }
 
     const retiro_maximo_mes_actual = total_restante_en_el_periodo / inflacion_acumulada_futura;
     const retiro_sugerido_mes_actual = minimo(retiro_maximo_mes_actual, retiro_total_del_mes);
@@ -22,7 +24,9 @@ export function retiro_en_pesos_sugerido_para_el_mes(
     return retiro_sugerido_mes_actual;
 }
 
-function inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo: number, factor_de_inflacion: number) {
+function inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo: number, inflacion_proyectada_mensual: number) {
+    const factor_de_inflacion = 1 + inflacion_proyectada_mensual;
+
     let inflacion_acumulada_en_el_periodo = 1;
     for (let mes_futuro = 1; mes_futuro < meses_restantes_en_el_periodo; mes_futuro++) {
         inflacion_acumulada_en_el_periodo += Math.pow(factor_de_inflacion, mes_futuro);

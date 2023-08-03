@@ -120,6 +120,25 @@ describe("Retiro sugerido en pesos para el mes", () => {
         expect(retiro_sugerido).toBe(maximo_de_la_ultima_categoria_monotributo);
     });
 
+    test('Cuando hay una brecha entre dolar mep y oficial, se aprovecha para maximizar el retiro en pesos' +
+        'sin pasarse de la categoria del monotributo', () => {
+        let retiro_total_del_mes = 10;
+        let maximo_de_la_ultima_categoria_monotributo: Peso = 8;
+        let precio_del_dolar_oficial_actual = 1;
+        let precio_del_dolar_mep_actual = 2;
+
+        let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
+            [],
+            retiro_total_del_mes,
+            1,
+            maximo_de_la_ultima_categoria_monotributo,
+            0,
+            precio_del_dolar_oficial_actual,
+            precio_del_dolar_mep_actual,
+        )
+        expect(retiro_sugerido).toBe(6);
+    });
+
     function retiro_sugerido_en_el_ultimo_mes_del_periodo(retiro_total_del_mes: number, maximo_de_la_ultima_categoria_monotributo: number) {
         return retiro_en_pesos_sugerido_para_el_mes(
             [],
