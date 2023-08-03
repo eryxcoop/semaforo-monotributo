@@ -4,34 +4,23 @@ describe("Retiro sugerido en pesos para el mes", () => {
     describe("En el ultimo mes del periodo", () => {
         test('Cuando no se va a alcanzar el limite del monotributo, todo el retiro se sugiere en pesos', () => {
             let retiro_total_del_mes: Peso = 10
-            let meses_restantes_en_el_periodo: number = 1
             let maximo_de_la_ultima_categoria_monotributo: Peso = 20
 
-            let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
-                [],
+            let retiro_sugerido = retiro_sugerido_en_el_ultimo_mes_del_periodo(
                 retiro_total_del_mes,
-                meses_restantes_en_el_periodo,
-                maximo_de_la_ultima_categoria_monotributo,
-                0,
-                0,
-                0,
-            )
+                maximo_de_la_ultima_categoria_monotributo
+            );
             expect(retiro_sugerido).toBe(retiro_total_del_mes);
         });
 
         test('Cuando se va a alcanzar el limite del monotributo, el retiro en pesos sugerido es el maximo sin pasarse', () => {
-            let meses_restantes_en_el_periodo: number = 1
-            let maximo_de_la_ultima_categoria_monotributo: Peso = 10
+            let retiro_total_del_mes = 100;
+            let maximo_de_la_ultima_categoria_monotributo: Peso = 10;
 
-            let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
-                [],
-                100,
-                meses_restantes_en_el_periodo,
-                maximo_de_la_ultima_categoria_monotributo,
-                0,
-                0,
-                0,
-            )
+            let retiro_sugerido = retiro_sugerido_en_el_ultimo_mes_del_periodo(
+                retiro_total_del_mes,
+                maximo_de_la_ultima_categoria_monotributo
+            );
             expect(retiro_sugerido).toBe(maximo_de_la_ultima_categoria_monotributo);
         });
 
@@ -130,4 +119,16 @@ describe("Retiro sugerido en pesos para el mes", () => {
         )
         expect(retiro_sugerido).toBe(maximo_de_la_ultima_categoria_monotributo);
     });
+
+    function retiro_sugerido_en_el_ultimo_mes_del_periodo(retiro_total_del_mes: number, maximo_de_la_ultima_categoria_monotributo: number) {
+        return retiro_en_pesos_sugerido_para_el_mes(
+            [],
+            retiro_total_del_mes,
+            1,
+            maximo_de_la_ultima_categoria_monotributo,
+            0,
+            0,
+            0,
+        );
+    }
 });
