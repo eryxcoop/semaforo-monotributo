@@ -14,15 +14,20 @@ export function retiro_en_pesos_sugerido_para_el_mes(
 
     const factor_de_inflacion = 1 + inflacion_proyectada_mensual;
 
+    let inflacion_acumulada_futura = inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo, factor_de_inflacion);
+
+    const retiro_maximo_mes_actual = total_restante_en_el_periodo / inflacion_acumulada_futura;
+    const retiro_sugerido_mes_actual = minimo(retiro_maximo_mes_actual, retiro_total_del_mes);
+
+    return retiro_sugerido_mes_actual;
+}
+
+function inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo: number, factor_de_inflacion: number) {
     let inflacion_acumulada_en_el_periodo = 1;
     for (let mes_futuro = 1; mes_futuro < meses_restantes_en_el_periodo; mes_futuro++) {
         inflacion_acumulada_en_el_periodo += Math.pow(factor_de_inflacion, mes_futuro);
     }
-
-    const retiro_maximo_mes_actual = total_restante_en_el_periodo / inflacion_acumulada_en_el_periodo;
-    const retiro_sugerido_mes_actual = minimo(retiro_maximo_mes_actual, retiro_total_del_mes);
-
-    return retiro_sugerido_mes_actual;
+    return inflacion_acumulada_en_el_periodo;
 }
 
 export function suma(lista_de_retiros: Peso[]): Peso {
