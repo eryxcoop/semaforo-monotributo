@@ -22,3 +22,23 @@ quizas haya que sacar los tipos porque se parsean mal en appscript
 Tests futuros:
     - caso de error cuando ya se paso el limite del monotributo en el pasado
     - caso de error cuando el valor del dolar mep es mayor al valor del dolar blue
+
+
+max monotributo 80.000
+100.000
+dolar mep 500
+dolar oficial 250
+-> sobran 20.000 pesos
+-> brecha de dolares porcentual es 50%
+-> si lo pido en dolares (40 mep), se contabilizarian 10.000 (40 oficial)
+-> puedo pedir 70.000 en pesos, el resto en dolares (60 mep) que contabilizan como 15000 pesos
+
+-> si pido todo en dolares, contabiliza como 50.000 pesos
+-> si pido todo en pesos, contabiliza como 100.000 pesos
+-> si pido 50.000 en pesos, el resto contabilizan como 75.000
+-> si pido 60.000 en pesos, el resto son 40.000 en dolarss, que contabilizan como 20.000 pesos
+
+contabilizacion(retiro_pesos) = retiro_pesos + (retiro_total-retiro_pesos)*250/500
+retiro_pesos(contabilizacion) = ...
+
+

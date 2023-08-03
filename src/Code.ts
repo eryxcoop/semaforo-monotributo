@@ -5,7 +5,9 @@ export function retiro_en_pesos_sugerido_para_el_mes(
     retiro_total_del_mes: Peso,
     meses_restantes_en_el_periodo: number,
     maximo_de_la_ultima_categoria_monotributo: Peso,
-    inflacion_proyectada_mensual
+    inflacion_proyectada_mensual,
+    precio_del_dolar_oficial_actual,
+    precio_del_dolar_mep_actual,
 ): Peso {
     const total_meses_anteriores = suma(retiros_anteriores_en_el_periodo);
     const total_restante_en_el_periodo = maximo_de_la_ultima_categoria_monotributo - total_meses_anteriores;
