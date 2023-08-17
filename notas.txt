@@ -45,12 +45,12 @@ categoria del monotributo
     dolar oficial 250
     dolar mep 500
 
-    todo en dolares -> 2000 dolares, 0 pesos -> 50.000
-    retiro en pesos + retiro en dolares * dolar oficial < limite del monotributo
-    retiro en dolares = (retiro_total - retiro_pesos) / dolar_mep
+    contabilizacion(retiro_pesos) < limite_monotributo
+    contabilizacion(retiro_pesos) = retiro_pesos + retiro_en_dolares_mep(retiro_pesos) * oficial
+    retiro_en_dolares_mep(retiro_pesos) = (retiro_total - retiro_pesos) / dolar_mep
 
-    retiro en pesos + (retiro_total - retiro_pesos) * (dolar_oficial / dolar_mep) < limite del monotributo
-    retiro en pesos + (retiro_total - retiro_pesos) * (dolar_oficial / dolar_mep) - limite_monotributo < 0
+    => contabilizacion(retiro_pesos) = retiro_pesos + (retiro_total - retiro_pesos) / dolar_mep * dolar_oficial
+    => retiro_pesos + (retiro_total - retiro_pesos) / dolar_mep * dolar_oficial < limite_monotributo
 
 3) Cuando, a pesar de pedir el 100% del retiro en dolares, me paso de categoria del monotributo
      retiro total en pesos: 100.000
