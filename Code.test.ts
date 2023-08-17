@@ -1,16 +1,6 @@
 import {Peso, retiro_en_pesos_sugerido_para_el_mes, suma} from "./src/Code";
 
-function retiro_sugerido_en_el_ultimo_mes_considerando_meses_pasados(retiros_anteriores_en_el_periodo: Peso[], retiro_total_del_mes: number, maximo_de_la_ultima_categoria_monotributo: number) {
-    return retiro_en_pesos_sugerido_para_el_mes(
-        retiros_anteriores_en_el_periodo,
-        retiro_total_del_mes,
-        1,
-        maximo_de_la_ultima_categoria_monotributo,
-        0,
-        0,
-        0,
-    );
-}
+
 
 describe("Retiro sugerido en pesos para el mes", () => {
     describe("En el ultimo mes del periodo", () => {
@@ -179,7 +169,7 @@ describe("Retiro sugerido en pesos para el mes", () => {
         );
     }
 
-    function retiro_sugerido_en_el_ultimo_mes_considerando_meses_pasados(retiros_anteriores_en_el_periodo: Peso[], retiro_total_del_mes: Peso, maximo_de_la_ultima_categoria_monotributo: number) {
+    function retiro_sugerido_en_el_ultimo_mes_considerando_meses_pasados(retiros_anteriores_en_el_periodo: Peso[], retiro_total_del_mes: number, maximo_de_la_ultima_categoria_monotributo: number) {
         return retiro_en_pesos_sugerido_para_el_mes(
             retiros_anteriores_en_el_periodo,
             retiro_total_del_mes,
