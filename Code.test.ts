@@ -1,7 +1,6 @@
 import {Peso, retiro_en_pesos_sugerido_para_el_mes, suma} from "./src/Code";
 
 
-
 describe("Retiro sugerido en pesos para el mes", () => {
     describe("En el ultimo mes del periodo", () => {
         test('Cuando no se va a alcanzar el limite del monotributo, todo el retiro se sugiere en pesos', () => {
@@ -45,18 +44,13 @@ describe("Retiro sugerido en pesos para el mes", () => {
 
         test('Tira un error cuando ya se paso el limite del monotributo en el pasado', () => {
             let retiros_anteriores_en_el_periodo: Peso[] = [10]
-            let meses_restantes_en_el_periodo: number = 1
             let maximo_de_la_ultima_categoria_monotributo: Peso = 9
             let retiro_total_del_mes = 100;
 
-            expect(() => retiro_en_pesos_sugerido_para_el_mes(
+            expect(() => retiro_sugerido_en_el_ultimo_mes_considerando_meses_pasados(
                 retiros_anteriores_en_el_periodo,
                 retiro_total_del_mes,
-                meses_restantes_en_el_periodo,
-                maximo_de_la_ultima_categoria_monotributo,
-                0,
-                0,
-                0,
+                maximo_de_la_ultima_categoria_monotributo
             )).toThrowError('Ya se paso el limite de la ultima categoria del monotributo en el pasado')
         });
     });
