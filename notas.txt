@@ -1,29 +1,18 @@
-inflación proyectada, lista de retiros en ARS del socie del pasado, retiro del mes actual, límite de la última categoría del monotributo.
-De salida, cual es el monto máximo recomendado.
-
-calcular_maximo_a_pedir(...
-    ...
-    total_anterior = suma de lo pedido en los meses anteriores dentro del periodo (ultimo año)
-    ...
-    resto_que_puedo_pedir_en_el_periodo = (maximo_para_pasar_de_categoria - total_anterior)
-    pedido por mes sin ajustar por infla = resto que puedo pedir en el peridodo / meses que le quedan al periodo contando el actual
-    recomendado = (pedido por mes sin ajustar por infla) min: ADE de este mes
-    return maximo_calculado
-)
+------- MEJORAS --------
 
 - LA SERIE HACERLA DIARIA Y NO MENSUAL
 - USAR LA INFLACION CORE
 - TIPO DE CAMBIO
 - ESPACIO HASTA COMPLETAR EL MONOTRIBUTO, MARGEN DE SEGURIDAD
 - MODELO ARIMA PARA ESTIMAR EN BASE A LOS RETIROS HISTORICOS
+- quizas haya que sacar los tipos porque se parsean mal en appscript
 
-quizas haya que sacar los tipos porque se parsean mal en appscript
+-------- Tests futuros ---------
 
-Tests futuros:
     - caso de error cuando ya se paso el limite del monotributo en el pasado
     - caso de error cuando el valor del dolar mep es mayor al valor del dolar blue
 
-
+-------- NOTAS DOLARES --------
 max monotributo 80.000
 100.000
 dolar mep 500
@@ -38,7 +27,40 @@ dolar oficial 250
 -> si pido 50.000 en pesos, el resto contabilizan como 75.000
 -> si pido 60.000 en pesos, el resto son 40.000 en dolarss, que contabilizan como 20.000 pesos
 
-contabilizacion(retiro_pesos) = retiro_pesos + (retiro_total-retiro_pesos)*250/500
-retiro_pesos(contabilizacion) = ...
+contabilizacion(retiro_pesos) = retiro_pesos + (retiro_total-retiro_pesos)*oficial/mep
+
+cont = retiro_pesos + (retiro_total-retiro_pesos) * oficial/mep
+cont = retiro_pesos + retiro_total * oficial/mep - retiro_pesos * oficial/mep
+cont - retiro_total * oficial/mep = retiro_pesos - retiro_pesos * oficial/mep
+
+1) Cuando no hay una brecha entre dolar mep y oficial, el retiro sugerido en pesos es el maximo sin pasarse de la
+categoria del monotributo
+
+2) Cuando hay una brecha entre dolar mep y oficial, se aprovecha para maximizar el retiro en pesos sin pasarse de la
+categoria del monotributo
+    retiro total en pesos: 100.000
+    ultimo mes del monotributo
+    periodo de 1 mes
+    limite de la ultima categoria del monotributo son 80.000
+    dolar oficial 250
+    dolar mep 500
+
+    todo en dolares -> 2000 dolares, 0 pesos -> 50.000
+    retiro en pesos + retiro en dolares * dolar oficial < limite del monotributo
+    retiro en dolares = (retiro_total - retiro_pesos) / dolar_mep
+
+    retiro en pesos + (retiro_total - retiro_pesos) * (dolar_oficial / dolar_mep) < limite del monotributo
+    retiro en pesos + (retiro_total - retiro_pesos) * (dolar_oficial / dolar_mep) - limite_monotributo < 0
+
+3) Cuando, a pesar de pedir el 100% del retiro en dolares, me paso de categoria del monotributo
+     retiro total en pesos: 100.000
+     ultimo mes del monotributo
+     periodo de 1 mes
+     limite de la ultima categoria del monotributo son 40.000
+     dolar oficial 250
+     dolar mep 500
+
+     todo en dolares -> 2000 dolares, 0 pesos -> 50.000
+     si o si me paso
 
 

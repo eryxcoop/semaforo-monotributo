@@ -102,7 +102,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
         expect(retiro_sugerido).toBe(maximo_retiro_actual_considerando_inflacion_futura);
     });
 
-    test('Cuando no hay una brecha entre dolar mep y oficial, el retiro sugerido en pesos es el maximo sin pasarse de la categoria del monotributo', () => {
+    test('Cuando no hay una brecha entre dolar mep y oficial, el retiro sugerido en pesos es el maximo sin pasarse de ' +
+        'la categoria del monotributo', () => {
         let retiro_total_del_mes = 20;
         let maximo_de_la_ultima_categoria_monotributo: Peso = 10;
         let precio_del_dolar_oficial_actual = 1;

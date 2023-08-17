@@ -27,6 +27,7 @@ export function retiro_en_pesos_sugerido_para_el_mes(
 function restante_en_el_periodo_antes_de_subir_de_categoria(retiros_anteriores_en_el_periodo: Peso[], maximo_de_la_ultima_categoria_monotributo: number) {
     const total_meses_anteriores = suma(retiros_anteriores_en_el_periodo);
     const total_restante_en_el_periodo = maximo_de_la_ultima_categoria_monotributo - total_meses_anteriores;
+
     return total_restante_en_el_periodo;
 }
 
