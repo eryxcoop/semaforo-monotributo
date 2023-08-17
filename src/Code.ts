@@ -11,6 +11,9 @@ export function retiro_en_pesos_sugerido_para_el_mes(
 ): Peso {
     const total_restante_en_el_periodo = restante_en_el_periodo_antes_de_subir_de_categoria(retiros_anteriores_en_el_periodo,
         maximo_de_la_ultima_categoria_monotributo);
+    if(total_restante_en_el_periodo <= 0) {
+        throw 'Ya se paso el limite de la ultima categoria del monotributo en el pasado';
+    }
 
     const inflacion_acumulada_futura = inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo, inflacion_proyectada_mensual);
 

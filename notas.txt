@@ -10,7 +10,6 @@
 -------- Tests futuros ---------
 
     - caso de error cuando ya se paso el limite del monotributo en el pasado
-    - caso de error cuando el valor del dolar mep es mayor al valor del dolar blue
 
 -------- NOTAS DOLARES --------
 max monotributo 80.000

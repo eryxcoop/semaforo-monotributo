@@ -42,6 +42,22 @@ describe("Retiro sugerido en pesos para el mes", () => {
             const maximo_retiro_sin_pasar_limite = maximo_de_la_ultima_categoria_monotributo - total_meses_pasados
             expect(retiro_sugerido).toBe(maximo_retiro_sin_pasar_limite);
         });
+
+        test('Tira un error cuando ya se paso el limite del monotributo en el pasado', () => {
+            let retiros_anteriores_en_el_periodo: Peso[] = [10]
+            let meses_restantes_en_el_periodo: number = 1
+            let maximo_de_la_ultima_categoria_monotributo: Peso = 9
+
+            expect(() => retiro_en_pesos_sugerido_para_el_mes(
+                retiros_anteriores_en_el_periodo,
+                100,
+                meses_restantes_en_el_periodo,
+                maximo_de_la_ultima_categoria_monotributo,
+                0,
+                0,
+                0,
+            )).toThrowError('Ya se paso el limite de la ultima categoria del monotributo en el pasado')
+        });
     });
 
     test('Cuando no hay inflacion, y restan varios meses en el periodo, se asumen iguales al mes actual', () => {
