@@ -1,5 +1,27 @@
 export type Peso = number;
 
+export class Xxx {
+    retiro_en_pesos_sugerido_para_el_mes(
+        retiros_anteriores_en_el_periodo: Peso[],
+        retiro_total_del_mes: Peso,
+        meses_restantes_en_el_periodo: number,
+        maximo_de_la_ultima_categoria_monotributo: Peso,
+        inflacion_proyectada_mensual,
+        precio_del_dolar_oficial_actual,
+        precio_del_dolar_mep_actual,
+    ) {
+        return retiro_en_pesos_sugerido_para_el_mes(
+            retiros_anteriores_en_el_periodo,
+            retiro_total_del_mes,
+            meses_restantes_en_el_periodo,
+            maximo_de_la_ultima_categoria_monotributo,
+            inflacion_proyectada_mensual,
+            precio_del_dolar_oficial_actual,
+            precio_del_dolar_mep_actual,
+        );
+    }
+}
+
 export function retiro_en_pesos_sugerido_para_el_mes(
     retiros_anteriores_en_el_periodo: Peso[],
     retiro_total_del_mes: Peso,

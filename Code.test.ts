@@ -1,4 +1,4 @@
-import {Peso, retiro_en_pesos_sugerido_para_el_mes, suma} from "./src/Code";
+import {Peso, retiro_en_pesos_sugerido_para_el_mes, suma, Xxx} from "./src/Code";
 
 
 describe("Retiro sugerido en pesos para el mes", () => {
@@ -11,6 +11,23 @@ describe("Retiro sugerido en pesos para el mes", () => {
             let retiro_sugerido = retiro_sugerido_en_el_ultimo_mes_del_periodo(
                 retiro_total_del_mes,
                 maximo_de_la_ultima_categoria_monotributo
+            );
+            expect(retiro_sugerido).toBe(retiro_total_del_mes);
+        });
+
+        test('Cuando no se va a alcanzar el limite del monotributo, todo el retiro se sugiere en pesos', () => {
+            let retiro_total_del_mes: Peso = 10
+            let maximo_de_la_ultima_categoria_monotributo: Peso = 20
+
+            const xxx = new Xxx();
+            let retiro_sugerido = xxx.retiro_en_pesos_sugerido_para_el_mes(
+                [],
+                retiro_total_del_mes,
+                1,
+                maximo_de_la_ultima_categoria_monotributo,
+                0,
+                0,
+                0,
             );
             expect(retiro_sugerido).toBe(retiro_total_del_mes);
         });
