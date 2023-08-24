@@ -9,7 +9,6 @@
 
 -------- Tests futuros ---------
 
-    - caso de error cuando ya se paso el limite del monotributo en el pasado
 
 -------- NOTAS DOLARES --------
 max monotributo 80.000
@@ -62,4 +61,6 @@ categoria del monotributo
      todo en dolares -> 2000 dolares, 0 pesos -> 50.000
      si o si me paso
 
+
+https://en.wikipedia.org/wiki/Linear_programming
 
