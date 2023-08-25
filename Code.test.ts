@@ -83,7 +83,7 @@ describe("Retiro sugerido en pesos para el mes", () => {
                     0,
                     0,
                     0,);
-                let retiro_sugerido = asesor_de_finanzas.retiro_en_pesos_sugerido_para_el_mes();
+                asesor_de_finanzas.retiro_en_pesos_sugerido_para_el_mes();
             }).toThrowError('Ya se paso el limite de la ultima categoria del monotributo en el pasado')
         });
     });
