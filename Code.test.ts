@@ -55,7 +55,7 @@ describe("Retiro sugerido en pesos para el mes", () => {
             let maximo_de_la_ultima_categoria_monotributo: Peso = 30
             let retiro_total_del_mes = 100;
 
-            const xxx = new Xxx( retiros_anteriores_en_el_periodo,
+            const xxx = new Xxx(retiros_anteriores_en_el_periodo,
                 retiro_total_del_mes,
                 1,
                 maximo_de_la_ultima_categoria_monotributo,
@@ -111,7 +111,7 @@ describe("Retiro sugerido en pesos para el mes", () => {
         let maximo_de_la_ultima_categoria_monotributo: Peso = 40
         let inflacion_proyectada_mensual = 0.5;
 
-        const xxx = new Xxx(  [],
+        const xxx = new Xxx([],
             100,
             meses_restantes_en_el_periodo,
             maximo_de_la_ultima_categoria_monotributo,
@@ -130,7 +130,7 @@ describe("Retiro sugerido en pesos para el mes", () => {
         let maximo_de_la_ultima_categoria_monotributo: Peso = 38
         let inflacion_proyectada_mensual = 0.5;
 
-        const xxx = new Xxx(    [],
+        const xxx = new Xxx([],
             100,
             meses_restantes_en_el_periodo,
             maximo_de_la_ultima_categoria_monotributo,
@@ -183,26 +183,24 @@ describe("Retiro sugerido en pesos para el mes", () => {
     });
 
     function retiro_sugerido_en_el_ultimo_mes_del_periodo(retiro_total_del_mes: number, maximo_de_la_ultima_categoria_monotributo: number) {
-        return retiro_en_pesos_sugerido_para_el_mes(
-            [],
+        const xxx = new Xxx([],
             retiro_total_del_mes,
             1,
             maximo_de_la_ultima_categoria_monotributo,
             0,
             0,
-            0,
-        );
+            0);
+        return xxx.retiro_en_pesos_sugerido_para_el_mes();
     }
 
     function retiro_sugerido_en_el_ultimo_mes_considerando_meses_pasados(retiros_anteriores_en_el_periodo: Peso[], retiro_total_del_mes: number, maximo_de_la_ultima_categoria_monotributo: number) {
-        return retiro_en_pesos_sugerido_para_el_mes(
-            retiros_anteriores_en_el_periodo,
+        const xxx = new Xxx(retiros_anteriores_en_el_periodo,
             retiro_total_del_mes,
             1,
             maximo_de_la_ultima_categoria_monotributo,
             0,
             0,
-            0,
-        );
+            0,);
+        return xxx.retiro_en_pesos_sugerido_para_el_mes();
     }
 });
