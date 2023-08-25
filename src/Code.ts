@@ -1,6 +1,6 @@
 export type Peso = number;
 
-export class Xxx {
+export class AsesorDeFinanzas {
     private retiros_anteriores_en_el_periodo: Peso[];
     private retiro_total_del_mes: Peso;
     private precio_del_dolar_mep_actual: any;
