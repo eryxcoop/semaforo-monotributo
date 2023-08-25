@@ -66,13 +66,13 @@ export class Xxx {
     }
 }
 
-export function suma(lista_de_retiros: Peso[]): Peso {
-    let total: Peso = 0
-    lista_de_retiros.forEach(retiro => total += retiro);
+export function suma(lista_de_numeros: number[]) {
+    let total = 0
+    lista_de_numeros.forEach(numero_en_la_lista => total += numero_en_la_lista);
     return total;
 }
 
-function minimo(retiro_maximo_por_mes_restante: number, retiro_total_del_mes: number) {
-    return retiro_maximo_por_mes_restante > retiro_total_del_mes ?
-        retiro_total_del_mes : retiro_maximo_por_mes_restante;
+function minimo(un_numero: number, otro_numero: number) {
+    return un_numero > otro_numero ?
+        otro_numero : un_numero;
 }
