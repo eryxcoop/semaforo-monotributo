@@ -8,6 +8,7 @@ export class Xxx {
     private maximo_de_la_ultima_categoria_monotributo: Peso;
     private inflacion_proyectada_mensual: any;
     private precio_del_dolar_oficial_actual: any;
+    private calculadora: Calculadora;
 
     constructor(retiros_anteriores_en_el_periodo: Peso[],
                 retiro_total_del_mes: Peso,
@@ -23,6 +24,7 @@ export class Xxx {
         this.inflacion_proyectada_mensual = inflacion_proyectada_mensual;
         this.precio_del_dolar_oficial_actual = precio_del_dolar_oficial_actual;
         this.precio_del_dolar_mep_actual = precio_del_dolar_mep_actual;
+        this.calculadora = new Calculadora();
     }
 
     retiro_en_pesos_sugerido_para_el_mes() {
@@ -39,7 +41,7 @@ export class Xxx {
         }
 
         const retiro_maximo_mes_actual = total_restante_en_el_periodo / inflacion_acumulada_futura;
-        const retiro_sugerido_mes_actual = minimo(retiro_maximo_mes_actual, this.retiro_total_del_mes);
+        const retiro_sugerido_mes_actual = this.calculadora.minimo(retiro_maximo_mes_actual, this.retiro_total_del_mes);
 
         return retiro_sugerido_mes_actual;
     }
@@ -49,7 +51,7 @@ export class Xxx {
     }
 
     restante_en_el_periodo_antes_de_subir_de_categoria(retiros_anteriores_en_el_periodo: Peso[], maximo_de_la_ultima_categoria_monotributo: number) {
-        const total_meses_anteriores = suma(retiros_anteriores_en_el_periodo);
+        const total_meses_anteriores = this.calculadora.suma(retiros_anteriores_en_el_periodo);
         const total_restante_en_el_periodo = maximo_de_la_ultima_categoria_monotributo - total_meses_anteriores;
 
         return total_restante_en_el_periodo;
@@ -66,13 +68,15 @@ export class Xxx {
     }
 }
 
-export function suma(lista_de_numeros: number[]) {
-    let total = 0
-    lista_de_numeros.forEach(numero_en_la_lista => total += numero_en_la_lista);
-    return total;
-}
+export class Calculadora {
+    suma(lista_de_numeros: number[]) {
+        let total = 0
+        lista_de_numeros.forEach(numero_en_la_lista => total += numero_en_la_lista);
+        return total;
+    }
 
-function minimo(un_numero: number, otro_numero: number) {
-    return un_numero > otro_numero ?
-        otro_numero : un_numero;
+    minimo(un_numero: number, otro_numero: number) {
+        return un_numero > otro_numero ?
+            otro_numero : un_numero;
+    }
 }

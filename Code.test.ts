@@ -1,4 +1,4 @@
-import {Peso, suma, Xxx} from "./src/Code";
+import {Peso, Calculadora, Xxx} from "./src/Code";
 
 
 describe("Retiro sugerido en pesos para el mes", () => {
@@ -64,7 +64,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
                 0,);
             let retiro_sugerido = xxx.retiro_en_pesos_sugerido_para_el_mes()
 
-            const total_meses_pasados = suma(retiros_anteriores_en_el_periodo);
+            const calculadora = new Calculadora();
+            const total_meses_pasados = calculadora.suma(retiros_anteriores_en_el_periodo);
             const maximo_retiro_sin_pasar_limite = maximo_de_la_ultima_categoria_monotributo - total_meses_pasados
             expect(retiro_sugerido).toBe(maximo_retiro_sin_pasar_limite);
         });
