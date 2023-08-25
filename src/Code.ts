@@ -27,12 +27,12 @@ export class Xxx {
 
     retiro_en_pesos_sugerido_para_el_mes() {
         const total_restante_en_el_periodo =
-            restante_en_el_periodo_antes_de_subir_de_categoria(this.retiros_anteriores_en_el_periodo, this.maximo_de_la_ultima_categoria_monotributo);
+            this.restante_en_el_periodo_antes_de_subir_de_categoria(this.retiros_anteriores_en_el_periodo, this.maximo_de_la_ultima_categoria_monotributo);
 
         if (this.ya_se_paso_el_maximo_del_monotributo(total_restante_en_el_periodo))
             throw 'Ya se paso el limite de la ultima categoria del monotributo en el pasado';
 
-        const inflacion_acumulada_futura = inflacion_acumulada_futura_en_el_periodo(this.meses_restantes_en_el_periodo, this.inflacion_proyectada_mensual);
+        const inflacion_acumulada_futura = this.inflacion_acumulada_futura_en_el_periodo(this.meses_restantes_en_el_periodo, this.inflacion_proyectada_mensual);
 
         if (this.precio_del_dolar_oficial_actual != this.precio_del_dolar_mep_actual) {
             return 6;
@@ -47,23 +47,23 @@ export class Xxx {
     ya_se_paso_el_maximo_del_monotributo(total_restante_en_el_periodo: number) {
         return total_restante_en_el_periodo <= 0;
     }
-}
 
-function restante_en_el_periodo_antes_de_subir_de_categoria(retiros_anteriores_en_el_periodo: Peso[], maximo_de_la_ultima_categoria_monotributo: number) {
-    const total_meses_anteriores = suma(retiros_anteriores_en_el_periodo);
-    const total_restante_en_el_periodo = maximo_de_la_ultima_categoria_monotributo - total_meses_anteriores;
+    restante_en_el_periodo_antes_de_subir_de_categoria(retiros_anteriores_en_el_periodo: Peso[], maximo_de_la_ultima_categoria_monotributo: number) {
+        const total_meses_anteriores = suma(retiros_anteriores_en_el_periodo);
+        const total_restante_en_el_periodo = maximo_de_la_ultima_categoria_monotributo - total_meses_anteriores;
 
-    return total_restante_en_el_periodo;
-}
-
-function inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo: number, inflacion_proyectada_mensual: number) {
-    const factor_de_inflacion = 1 + inflacion_proyectada_mensual;
-
-    let inflacion_acumulada_en_el_periodo = 1;
-    for (let mes_futuro = 1; mes_futuro < meses_restantes_en_el_periodo; mes_futuro++) {
-        inflacion_acumulada_en_el_periodo += Math.pow(factor_de_inflacion, mes_futuro);
+        return total_restante_en_el_periodo;
     }
-    return inflacion_acumulada_en_el_periodo;
+
+    inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo: number, inflacion_proyectada_mensual: number) {
+        const factor_de_inflacion = 1 + inflacion_proyectada_mensual;
+
+        let inflacion_acumulada_en_el_periodo = 1;
+        for (let mes_futuro = 1; mes_futuro < meses_restantes_en_el_periodo; mes_futuro++) {
+            inflacion_acumulada_en_el_periodo += Math.pow(factor_de_inflacion, mes_futuro);
+        }
+        return inflacion_acumulada_en_el_periodo;
+    }
 }
 
 export function suma(lista_de_retiros: Peso[]): Peso {
