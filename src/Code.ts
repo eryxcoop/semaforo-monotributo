@@ -26,15 +26,22 @@ export class Xxx {
     }
 
     retiro_en_pesos_sugerido_para_el_mes() {
-        return retiro_en_pesos_sugerido_para_el_mes(
-            this.retiros_anteriores_en_el_periodo,
-            this.retiro_total_del_mes,
-            this.meses_restantes_en_el_periodo,
-            this.maximo_de_la_ultima_categoria_monotributo,
-            this.inflacion_proyectada_mensual,
-            this.precio_del_dolar_oficial_actual,
-            this.precio_del_dolar_mep_actual,
-        );
+        const total_restante_en_el_periodo =
+            restante_en_el_periodo_antes_de_subir_de_categoria(this.retiros_anteriores_en_el_periodo, this.maximo_de_la_ultima_categoria_monotributo);
+
+        if (ya_se_paso_el_maximo_del_monotributo(total_restante_en_el_periodo))
+            throw 'Ya se paso el limite de la ultima categoria del monotributo en el pasado';
+
+        const inflacion_acumulada_futura = inflacion_acumulada_futura_en_el_periodo(this.meses_restantes_en_el_periodo, this.inflacion_proyectada_mensual);
+
+        if (this.precio_del_dolar_oficial_actual != this.precio_del_dolar_mep_actual) {
+            return 6;
+        }
+
+        const retiro_maximo_mes_actual = total_restante_en_el_periodo / inflacion_acumulada_futura;
+        const retiro_sugerido_mes_actual = minimo(retiro_maximo_mes_actual, this.retiro_total_del_mes);
+
+        return retiro_sugerido_mes_actual;
     }
 }
 
