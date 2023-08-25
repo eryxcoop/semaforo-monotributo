@@ -42,9 +42,15 @@ describe("Retiro sugerido en pesos para el mes", () => {
             let retiro_total_del_mes = 20;
             let maximo_de_la_ultima_categoria_monotributo: Peso = 10;
 
-            let retiro_sugerido = retiro_sugerido_en_el_ultimo_mes_del_periodo(
+            const xxx = new Xxx();
+            let retiro_sugerido = xxx.retiro_en_pesos_sugerido_para_el_mes(
+                [],
                 retiro_total_del_mes,
-                maximo_de_la_ultima_categoria_monotributo
+                1,
+                maximo_de_la_ultima_categoria_monotributo,
+                0,
+                0,
+                0,
             );
             expect(retiro_sugerido).toBe(maximo_de_la_ultima_categoria_monotributo);
         });
@@ -54,10 +60,15 @@ describe("Retiro sugerido en pesos para el mes", () => {
             let maximo_de_la_ultima_categoria_monotributo: Peso = 30
             let retiro_total_del_mes = 100;
 
-            let retiro_sugerido = retiro_sugerido_en_el_ultimo_mes_considerando_meses_pasados(
+            const xxx = new Xxx();
+            let retiro_sugerido = xxx.retiro_en_pesos_sugerido_para_el_mes(
                 retiros_anteriores_en_el_periodo,
                 retiro_total_del_mes,
-                maximo_de_la_ultima_categoria_monotributo
+                1,
+                maximo_de_la_ultima_categoria_monotributo,
+                0,
+                0,
+                0,
             )
 
             const total_meses_pasados = suma(retiros_anteriores_en_el_periodo);
@@ -70,11 +81,18 @@ describe("Retiro sugerido en pesos para el mes", () => {
             let maximo_de_la_ultima_categoria_monotributo: Peso = 9
             let retiro_total_del_mes = 100;
 
-            expect(() => retiro_sugerido_en_el_ultimo_mes_considerando_meses_pasados(
-                retiros_anteriores_en_el_periodo,
-                retiro_total_del_mes,
-                maximo_de_la_ultima_categoria_monotributo
-            )).toThrowError('Ya se paso el limite de la ultima categoria del monotributo en el pasado')
+            expect(() => {
+                const xxx = new Xxx();
+                let retiro_sugerido = xxx.retiro_en_pesos_sugerido_para_el_mes(
+                    retiros_anteriores_en_el_periodo,
+                    retiro_total_del_mes,
+                    1,
+                    maximo_de_la_ultima_categoria_monotributo,
+                    0,
+                    0,
+                    0,
+                );
+            }).toThrowError('Ya se paso el limite de la ultima categoria del monotributo en el pasado')
         });
     });
 
@@ -85,7 +103,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
         let maximo_de_la_ultima_categoria_monotributo: Peso = 30
         let inflacion_proyectada_mensual = 0;
 
-        let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
+        const xxx = new Xxx();
+        let retiro_sugerido = xxx.retiro_en_pesos_sugerido_para_el_mes(
             [],
             100,
             meses_restantes_en_el_periodo,
@@ -103,7 +122,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
         let maximo_de_la_ultima_categoria_monotributo: Peso = 40
         let inflacion_proyectada_mensual = 0.5;
 
-        let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
+        const xxx = new Xxx();
+        let retiro_sugerido = xxx.retiro_en_pesos_sugerido_para_el_mes(
             [],
             100,
             meses_restantes_en_el_periodo,
@@ -123,7 +143,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
         let maximo_de_la_ultima_categoria_monotributo: Peso = 38
         let inflacion_proyectada_mensual = 0.5;
 
-        let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
+        const xxx = new Xxx();
+        let retiro_sugerido = xxx.retiro_en_pesos_sugerido_para_el_mes(
             [],
             100,
             meses_restantes_en_el_periodo,
@@ -147,7 +168,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
         let precio_del_dolar_oficial_actual = 1;
         let precio_del_dolar_mep_actual = 1;
 
-        let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
+        const xxx = new Xxx();
+        let retiro_sugerido = xxx.retiro_en_pesos_sugerido_para_el_mes(
             [],
             retiro_total_del_mes,
             1,
@@ -166,7 +188,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
         let precio_del_dolar_oficial_actual = 1;
         let precio_del_dolar_mep_actual = 2;
 
-        let retiro_sugerido = retiro_en_pesos_sugerido_para_el_mes(
+        const xxx = new Xxx();
+        let retiro_sugerido = xxx.retiro_en_pesos_sugerido_para_el_mes(
             [],
             retiro_total_del_mes,
             1,
