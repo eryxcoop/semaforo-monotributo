@@ -46,18 +46,20 @@ export class AsesorDeFinanzas {
         return retiro_sugerido_mes_actual;
     }
 
-    ya_se_paso_el_maximo_del_monotributo(total_restante_en_el_periodo: number) {
+    // private
+
+    private ya_se_paso_el_maximo_del_monotributo(total_restante_en_el_periodo: number) {
         return total_restante_en_el_periodo <= 0;
     }
 
-    restante_en_el_periodo_antes_de_subir_de_categoria(retiros_anteriores_en_el_periodo: Peso[], maximo_de_la_ultima_categoria_monotributo: number) {
+    private restante_en_el_periodo_antes_de_subir_de_categoria(retiros_anteriores_en_el_periodo: Peso[], maximo_de_la_ultima_categoria_monotributo: number) {
         const total_meses_anteriores = this.calculadora.suma(retiros_anteriores_en_el_periodo);
         const total_restante_en_el_periodo = maximo_de_la_ultima_categoria_monotributo - total_meses_anteriores;
 
         return total_restante_en_el_periodo;
     }
 
-    inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo: number, inflacion_proyectada_mensual: number) {
+    private inflacion_acumulada_futura_en_el_periodo(meses_restantes_en_el_periodo: number, inflacion_proyectada_mensual: number) {
         const factor_de_inflacion = 1 + inflacion_proyectada_mensual;
 
         let inflacion_acumulada_en_el_periodo = 1;

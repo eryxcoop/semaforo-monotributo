@@ -1,4 +1,4 @@
-import {Peso, Calculadora, AsesorDeFinanzas} from "./src/Code";
+import {Peso, Calculadora, AsesorDeFinanzas} from "./src/AsesorDeFinanzas";
 
 
 describe("Retiro sugerido en pesos para el mes", () => {
