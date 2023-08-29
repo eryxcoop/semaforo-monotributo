@@ -10,6 +10,10 @@ export class AsesorDeFinanzas {
     private precio_del_dolar_oficial_actual: any;
     private calculadora: Calculadora;
 
+    private static ya_se_paso_el_limite_de_la_ultima_categoria_mensaje_de_error() {
+        return 'Ya se paso el limite de la ultima categoria del monotributo en el pasado';
+    }
+
     constructor(retiros_anteriores_en_el_periodo: Peso[],
                 retiro_total_del_mes: Peso,
                 meses_restantes_en_el_periodo: number,
@@ -32,7 +36,7 @@ export class AsesorDeFinanzas {
             this.restante_en_el_periodo_antes_de_subir_de_categoria(this.retiros_anteriores_en_el_periodo, this.maximo_de_la_ultima_categoria_monotributo);
 
         if (this.ya_se_paso_el_maximo_del_monotributo(total_restante_en_el_periodo))
-            throw 'Ya se paso el limite de la ultima categoria del monotributo en el pasado';
+            throw AsesorDeFinanzas.ya_se_paso_el_limite_de_la_ultima_categoria_mensaje_de_error();
 
         const inflacion_acumulada_futura = this.inflacion_acumulada_futura_en_el_periodo(this.meses_restantes_en_el_periodo, this.inflacion_proyectada_mensual);
 
@@ -46,7 +50,7 @@ export class AsesorDeFinanzas {
         return retiro_sugerido_mes_actual;
     }
 
-    // private
+// private
 
     private ya_se_paso_el_maximo_del_monotributo(total_restante_en_el_periodo: number) {
         return total_restante_en_el_periodo <= 0;

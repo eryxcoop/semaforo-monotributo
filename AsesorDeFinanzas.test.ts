@@ -2,6 +2,7 @@ import {AsesorDeFinanzas, Calculadora, Peso} from "./src/AsesorDeFinanzas";
 
 describe("Retiro sugerido en pesos para el mes", () => {
     // retiro sugerido
+
     describe("En el ultimo mes del periodo", () => {
         test('Cuando no se va a alcanzar el limite del monotributo, todo el retiro se sugiere en pesos', () => {
             let retiro_total_del_mes: Peso = 10
