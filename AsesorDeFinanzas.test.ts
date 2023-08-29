@@ -49,14 +49,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
             let retiro_total_del_mes = 100;
 
             expect(() => {
-                const asesor_de_finanzas = new AsesorDeFinanzas(retiros_anteriores_en_el_periodo,
-                    retiro_total_del_mes,
-                    1,
-                    maximo_de_la_ultima_categoria_monotributo,
-                    0,
-                    0,
-                    0,);
-                asesor_de_finanzas.retiro_en_pesos_sugerido_para_el_mes();
+                retiro_sugerido_en_el_ultimo_mes_considerando_meses_pasados(
+                    retiros_anteriores_en_el_periodo, retiro_total_del_mes, maximo_de_la_ultima_categoria_monotributo);
             }).toThrowError('Ya se paso el limite de la ultima categoria del monotributo en el pasado')
         });
     });
