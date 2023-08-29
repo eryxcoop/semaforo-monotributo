@@ -1,5 +1,4 @@
-import {Peso, Calculadora, AsesorDeFinanzas} from "./src/AsesorDeFinanzas";
-
+import {AsesorDeFinanzas, Calculadora, Peso} from "./src/AsesorDeFinanzas";
 
 describe("Retiro sugerido en pesos para el mes", () => {
     // retiro sugerido
@@ -8,14 +7,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
             let retiro_total_del_mes: Peso = 10
             let maximo_de_la_ultima_categoria_monotributo: Peso = 20
 
-            const asesor_de_finanzas = new AsesorDeFinanzas([],
-                retiro_total_del_mes,
-                1,
-                maximo_de_la_ultima_categoria_monotributo,
-                0,
-                0,
-                0,);
-            let retiro_sugerido = asesor_de_finanzas.retiro_en_pesos_sugerido_para_el_mes();
+            let retiro_sugerido = retiro_sugerido_en_el_ultimo_mes_del_periodo(
+                retiro_total_del_mes, maximo_de_la_ultima_categoria_monotributo);
             expect(retiro_sugerido).toBe(retiro_total_del_mes);
         });
 
@@ -23,14 +16,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
             let retiro_total_del_mes: Peso = 10
             let maximo_de_la_ultima_categoria_monotributo: Peso = 20
 
-            const asesor_de_finanzas = new AsesorDeFinanzas([],
-                retiro_total_del_mes,
-                1,
-                maximo_de_la_ultima_categoria_monotributo,
-                0,
-                0,
-                0,);
-            let retiro_sugerido = asesor_de_finanzas.retiro_en_pesos_sugerido_para_el_mes();
+            let retiro_sugerido = retiro_sugerido_en_el_ultimo_mes_del_periodo(
+                retiro_total_del_mes, maximo_de_la_ultima_categoria_monotributo);
             expect(retiro_sugerido).toBe(retiro_total_del_mes);
         });
 
@@ -38,15 +25,8 @@ describe("Retiro sugerido en pesos para el mes", () => {
             let retiro_total_del_mes = 20;
             let maximo_de_la_ultima_categoria_monotributo: Peso = 10;
 
-            const asesor_de_finanzas = new AsesorDeFinanzas(
-                [],
-                retiro_total_del_mes,
-                1,
-                maximo_de_la_ultima_categoria_monotributo,
-                0,
-                0,
-                0,);
-            let retiro_sugerido = asesor_de_finanzas.retiro_en_pesos_sugerido_para_el_mes();
+            let retiro_sugerido = retiro_sugerido_en_el_ultimo_mes_del_periodo(
+                retiro_total_del_mes, maximo_de_la_ultima_categoria_monotributo);
             expect(retiro_sugerido).toBe(maximo_de_la_ultima_categoria_monotributo);
         });
 
@@ -55,18 +35,11 @@ describe("Retiro sugerido en pesos para el mes", () => {
             let maximo_de_la_ultima_categoria_monotributo: Peso = 30
             let retiro_total_del_mes = 100;
 
-            const asesor_de_finanzas = new AsesorDeFinanzas(retiros_anteriores_en_el_periodo,
-                retiro_total_del_mes,
-                1,
-                maximo_de_la_ultima_categoria_monotributo,
-                0,
-                0,
-                0,);
-            let retiro_sugerido = asesor_de_finanzas.retiro_en_pesos_sugerido_para_el_mes()
+            let retiro_sugerido = retiro_sugerido_en_el_ultimo_mes_considerando_meses_pasados(
+                retiros_anteriores_en_el_periodo, retiro_total_del_mes, maximo_de_la_ultima_categoria_monotributo);
 
-            const calculadora = new Calculadora();
-            const total_meses_pasados = calculadora.suma(retiros_anteriores_en_el_periodo);
-            const maximo_retiro_sin_pasar_limite = maximo_de_la_ultima_categoria_monotributo - total_meses_pasados
+            let total_meses_pasados = total_meses_pasados_en_el_periodo(retiros_anteriores_en_el_periodo);
+            const maximo_retiro_sin_pasar_limite = maximo_de_la_ultima_categoria_monotributo - total_meses_pasados;
             expect(retiro_sugerido).toBe(maximo_retiro_sin_pasar_limite);
         });
 
@@ -203,5 +176,10 @@ describe("Retiro sugerido en pesos para el mes", () => {
             0,
             0,);
         return asesor_de_finanzas.retiro_en_pesos_sugerido_para_el_mes();
+    }
+
+    function total_meses_pasados_en_el_periodo(retiros_anteriores_en_el_periodo: Peso[]) {
+        const calculadora = new Calculadora();
+        return calculadora.suma(retiros_anteriores_en_el_periodo);
     }
 });
