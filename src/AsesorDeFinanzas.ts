@@ -41,7 +41,8 @@ export class AsesorDeFinanzas {
         const inflacion_acumulada_futura = this.inflacion_acumulada_futura_en_el_periodo(this.meses_restantes_en_el_periodo, this.inflacion_proyectada_mensual);
 
         if (this.precio_del_dolar_oficial_actual != this.precio_del_dolar_mep_actual) {
-            return 6;
+            const brecha = this.precio_del_dolar_oficial_actual / this.precio_del_dolar_mep_actual;
+            return (this.maximo_de_la_ultima_categoria_monotributo - this.retiro_total_del_mes * brecha) / (1 - brecha);
         }
 
         const retiro_maximo_mes_actual = total_restante_en_el_periodo / inflacion_acumulada_futura;

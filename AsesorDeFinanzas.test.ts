@@ -121,10 +121,11 @@ describe("Retiro sugerido en pesos para el mes", () => {
         let maximo_de_la_ultima_categoria_monotributo: Peso = 10;
         let precio_del_dolar_oficial_actual = 1;
         let precio_del_dolar_mep_actual = 1;
+        let mesesRestantesEnElPeriodo = 1;
 
         const asesor_de_finanzas = new AsesorDeFinanzas([],
             retiro_total_del_mes,
-            1,
+            mesesRestantesEnElPeriodo,
             maximo_de_la_ultima_categoria_monotributo,
             0,
             precio_del_dolar_oficial_actual,
@@ -133,16 +134,17 @@ describe("Retiro sugerido en pesos para el mes", () => {
         expect(retiro_sugerido).toBe(maximo_de_la_ultima_categoria_monotributo);
     });
 
-    test('Cuando hay una brecha entre dolar mep y oficial, se aprovecha para maximizar el retiro en pesos' +
+    test('Cuando hay una brecha del 50% entre dolar mep y oficial en el ultimo mes, se aprovecha para maximizar el retiro en pesos' +
         'sin pasarse de la categoria del monotributo', () => {
         let retiro_total_del_mes = 10;
         let maximo_de_la_ultima_categoria_monotributo: Peso = 8;
         let precio_del_dolar_oficial_actual = 1;
         let precio_del_dolar_mep_actual = 2;
+        let mesesRestantesEnElPeriodo = 1;
 
         const asesor_de_finanzas = new AsesorDeFinanzas([],
             retiro_total_del_mes,
-            1,
+            mesesRestantesEnElPeriodo,
             maximo_de_la_ultima_categoria_monotributo,
             0,
             precio_del_dolar_oficial_actual,
