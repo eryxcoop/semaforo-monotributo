@@ -32,28 +32,35 @@ function retiro_en_pesos_sugerido(retiros_anteriores_en_el_periodo: Peso[],
 }
 
 /**
- * Recomienda un retiro en pesos para el mes, de manera que no se pase el límite del monotributo. Esta función asume que los dolares valen 0 pesos.
+ * Recomienda un retiro en pesos para el mes, de manera que no se pase el límite del monotributo.
  *
  * @param {array<number>} retiros_anteriores_en_el_periodo
  * @param {number} retiro_total_del_mes
+ * @param {number} meses_pasados_en_el_periodo
  * @param {number} meses_restantes_en_el_periodo
  * @param {number} maximo_de_la_ultima_categoria_monotributo
- * @param {number} inflacion_proyectada_mensual Asume que cada mes futuro tendrá una inflacion fija. Se pone como un número entre 0 y 1 que representa un porcentaje a aumentar. Es efectiva, se aplica sobre el mes anterior actualizado. * @param {number} precio_del_dolar_oficial_actual
+ * @param {number} inflacion_proyectada_mensual Asume que cada mes futuro tendrá una inflacion fija. Se pone como un número entre 0 y 1 que representa un porcentaje a aumentar. Es efectiva, se aplica sobre el mes anterior actualizado.
+ * @param {number} precio_del_dolar_oficial_actual
  * @param {number} precio_del_dolar_mep_actual
  * @return {number} retiro_sugerido
  * @customfunction
  */
 function retiro_en_pesos_sugerido_con_dolares(retiros_anteriores_en_el_periodo: Peso[],
                                               retiro_total_del_mes: Peso,
+                                              meses_pasados_en_el_periodo: number,
                                               meses_restantes_en_el_periodo: number,
                                               maximo_de_la_ultima_categoria_monotributo: Peso,
                                               inflacion_proyectada_mensual,
                                               precio_del_dolar_oficial_actual,
                                               precio_del_dolar_mep_actual) {
     const retiros_anteriores = retiros_anteriores_en_el_periodo.flat();
+    if (retiros_anteriores.length < meses_pasados_en_el_periodo) {
+        throw "No hay suficientes datos de retiros anteriores"
+    }
+    const retiros_anteriores_en_periodo = retiros_anteriores.slice(retiros_anteriores.length - meses_pasados_en_el_periodo)
 
     const asesor_de_finanzas = new AsesorDeFinanzas(
-        retiros_anteriores,
+        retiros_anteriores_en_periodo,
         retiro_total_del_mes,
         meses_restantes_en_el_periodo,
         maximo_de_la_ultima_categoria_monotributo,
